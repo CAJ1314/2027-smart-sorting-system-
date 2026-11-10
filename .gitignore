@@ -36,6 +36,17 @@ Backup_*/
 *.corrupt_*
 *.uvprojx.before_*.bak
 
+# ===== 3D 建模文件 =====
+# 只保留 SolidWorks 源文件(.SLDPRT/.SLDASM)与切片文件(.3mf)，网格导出格式不入库
+*.STL
+*.stl
+*.STEP
+*.step
+*.IGS
+*.igs
+# SolidWorks 临时锁文件
+~$*
+
 # ===== 编辑器 / 系统 =====
 .vscode/settings.json
 Thumbs.db
