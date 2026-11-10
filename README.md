@@ -4,6 +4,18 @@
 
 ---
 
+## 实物展示
+
+<p align="center">
+  <img src="docs/images/device.jpg" alt="智能分拣装置实物" width="620">
+</p>
+
+<p align="center">
+  <em>整机实物：铝合金型材框架 / 双 K230 摄像头 / 三轴步进 + 齿条 Z 轴 / 舵机夹爪 / 六工位分类转盘</em>
+</p>
+
+---
+
 ## 系统架构
 
 ```mermaid
@@ -67,6 +79,8 @@ graph LR
 │   ├── Hardware/        # Servo / PWM / OLED / Key / LED
 │   ├── Library/         # STM32F10x 标准外设库
 │   └── Start/
+├── 装置零件建模/        # SolidWorks 零件源文件（.SLDPRT）+ 切片文件（.3mf）
+├── docs/images/         # README 配图
 └── 分拣项目.code-workspace
 ```
 
