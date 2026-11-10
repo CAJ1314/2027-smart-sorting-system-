@@ -80,6 +80,7 @@ graph LR
 │   ├── Library/         # STM32F10x 标准外设库
 │   └── Start/
 ├── 装置零件建模/        # SolidWorks 零件源文件（.SLDPRT）+ 切片文件（.3mf）
+├── K230视觉程序/        # K230 端 MicroPython 视觉脚本
 ├── docs/images/         # README 配图
 └── 分拣项目.code-workspace
 ```
@@ -106,6 +107,39 @@ graph LR
 | F103 → F407 | `ERR\r\n` | 无效指令 |
 
 串口参数：115200, 8N1。F407 侧最长等待 3000 ms。
+
+## K230 视觉程序
+
+`K230视觉程序/` 目录包含运行在 K230 模组上的 MicroPython 脚本，通过 UART 与 F407 通信，波特率 115200。
+
+| 脚本 | 模型 | 功能 | 输出报文 |
+| --- | --- | --- | --- |
+| `object_priority_uart_two_stage.py` | YOLO26（7 类） | **第一相机**：检测物料并输出抓取坐标 | `TARGET,1,<形状>,<颜色>,<X>,<Y>,CM` |
+| `k230_video_wukuaicapture.py` | YOLO11（无裁剪） | **第二相机**：识别颜色与形状，仅用于分类 | `SHAPE:<形状>,COLOR:<颜色>` |
+
+### 识别能力
+
+- **形状 7 类**：`zhengfangti`（正方体）、`yuanzhu`（圆柱）、`changfangti`（长方体）、`lengzhu`（棱柱）、`qiu`（球）、`sanlengzhui`（三棱锥）、`yuanzhui`（圆锥）
+- **颜色 7 类**：`red` / `black` / `yellow` / `dark blue` / `light blue` / `orange` / `green`，采用 LAB 空间阈值 + 6×6 网格投票判定
+
+### 关键技术点
+
+- **无头模式采集**：不初始化 Display/OSD，只跑 AI 通道（`CAM_CHN_ID_2`），降低内存与延迟
+- **多帧稳定确认**：同一目标连续 5 帧形状与颜色一致才输出，避免抖动误判
+- **抓取优先级**：`GRAB_PRIORITY` 按正方体 → 圆柱 → 棱柱 → 球 → 长方体排序选目标
+- **像素→机械坐标**：十点标定的非线性最小二乘单应性矩阵，把图像坐标直接换算为夹爪平面 X/Y（单位 cm）
+- **ROI 弧形裁剪**：`point_in_curved_roi()` 只保留弧形视野内的目标，剔除边缘畸变区域
+- **按需触发**：等待 F407 发送 `s` 命令才启动一次识别，空闲时不跑推理，节省算力
+
+### 部署说明
+
+1. 将 `.kmodel` 模型文件拷贝到 K230：
+   - 第一相机：`/data/best.kmodel`（YOLO26 七类）
+   - 第二相机：`/sdcard/best_noclip_uint80.kmodel`（YOLO11）
+2. 将对应 `.py` 脚本放到 K230 的 `CanMV IDE` 中运行，或拷贝到板卡开机执行
+3. 依赖库：`libs.YOLO`、`libs.Utils`、`ybUtils.YbUart`、`media.sensor`、`media.media`（K230 CanMV 固件自带）
+
+> 模型训练/导出需与脚本中的 `MODEL_INPUT_SIZE = [640, 640]` 保持一致，否则检测框坐标会错位。
 
 ## 编译与烧录
 
