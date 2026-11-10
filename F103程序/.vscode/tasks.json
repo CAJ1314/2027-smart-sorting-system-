@@ -1,0 +1,119 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "编译 F103",
+            "type": "shell",
+            "command": "D:/keil5/UV4/UV4.exe",
+            "args": [
+                "-b",
+                "Project.uvprojx",
+                "-t",
+                "Target 1",
+                "-j0",
+                "-o",
+                "${workspaceFolder}/build_keil.log"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": {
+                "owner": "keil",
+                "fileLocation": "autoDetect",
+                "pattern": [
+                    {
+                        "regexp": "^(.*)\\((\\d+)\\):\\s+(warning|error|info)\\s*[:#]?\\s*(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message": 4
+                    },
+                    {
+                        "regexp": "^(.*)\\((\\d+)\\):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3
+                    }
+                ]
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            }
+        },
+        {
+            "label": "重新编译 F103",
+            "type": "shell",
+            "command": "D:/keil5/UV4/UV4.exe",
+            "args": [
+                "-r",
+                "Project.uvprojx",
+                "-t",
+                "Target 1",
+                "-j0",
+                "-o",
+                "${workspaceFolder}/build_keil.log"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": {
+                "owner": "keil",
+                "fileLocation": "autoDetect",
+                "pattern": [
+                    {
+                        "regexp": "^(.*)\\((\\d+)\\):\\s+(warning|error|info)\\s*[:#]?\\s*(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "severity": 3,
+                        "message": 4
+                    },
+                    {
+                        "regexp": "^(.*)\\((\\d+)\\):\\s+(.*)$",
+                        "file": 1,
+                        "line": 2,
+                        "message": 3
+                    }
+                ]
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "clear": true,
+                "showReuseMessage": false
+            }
+        },
+        {
+            "label": "查看编译日志 F103",
+            "type": "shell",
+            "command": "powershell",
+            "args": [
+                "-NoProfile",
+                "-Command",
+                "Get-Content '${workspaceFolder}/build_keil.log' -Encoding Default"
+            ],
+            "problemMatcher": [],
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "在 Keil 中打开 F103",
+            "type": "shell",
+            "command": "D:/keil5/UV4/UV4.exe",
+            "args": ["Project.uvprojx"],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "problemMatcher": []
+        }
+    ]
+}

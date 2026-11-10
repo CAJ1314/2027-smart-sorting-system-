@@ -1,0 +1,58 @@
+{
+    "folders": [
+        {
+            "name": "F103 程序",
+            "path": "F103程序"
+        },
+        {
+            "name": "F407 程序",
+            "path": "F407程序"
+        }
+    ],
+    "settings": {
+        "files.encoding": "utf8",
+        "files.autoGuessEncoding": true,
+
+        "C_Cpp.default.cStandard": "c99",
+        "C_Cpp.default.intelliSenseMode": "gcc-arm",
+        "C_Cpp.errorSquiggles": "enabled",
+        "C_Cpp.intelliSenseEngine": "default",
+
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true,
+        "editor.renderWhitespace": "boundary",
+
+        "files.associations": {
+            "*.uvprojx": "xml",
+            "*.uvoptx": "xml",
+            "*.s": "arm",
+            "*.sct": "plaintext"
+        },
+
+        "files.exclude": {
+            "**/Objects": true,
+            "**/Listings": true,
+            "**/DebugConfig": true,
+            "**/*.uvguix.*": true,
+            "**/Backup_*": true,
+            "**/备份_*": true
+        },
+        "search.exclude": {
+            "**/Objects": true,
+            "**/Listings": true,
+            "**/Backup_*": true,
+            "**/备份_*": true,
+            "**/*.bak": true,
+            "**/build_*.txt": true,
+            "**/build_*.log": true
+        },
+
+        "explorer.fileNesting.enabled": true,
+        "explorer.fileNesting.expand": false,
+        "explorer.fileNesting.patterns": {
+            "*.c": "${capture}.h, ${capture}.c.bak, ${capture}.c.bak_*, ${capture}.c.before_*",
+            "*.h": "${capture}.h.bak, ${capture}.h.bak_*, ${capture}.h.before_*",
+            "Project.uvprojx": "Project.uvoptx, Project.uvguix.*"
+        }
+    }
+}

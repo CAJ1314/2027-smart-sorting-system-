@@ -1,0 +1,43 @@
+# ===== Keil 构建产物 =====
+Objects/
+Listings/
+DebugConfig/
+*.hex
+*.axf
+*.bin
+*.map
+*.lst
+*.o
+*.d
+*.crf
+*.dep
+*.htm
+*.lnp
+*.sct
+*.build_log.htm
+build_keil.log
+flash_keil.log
+Rebuild.log
+build_*.log
+build_*.txt
+
+# ===== Keil 用户界面状态（每次打开都会变） =====
+*.uvguix.*
+*.uvoptx.bak
+JLinkLog.txt
+JLinkSettings.ini
+
+# ===== 历史备份快照（不进版本库） =====
+Backup_*/
+备份_*/
+*.bak
+*.bak_*
+*.before_*.bak
+*.corrupt_*
+*.uvprojx.before_*.bak
+
+# ===== 编辑器 / 系统 =====
+.vscode/settings.json
+Thumbs.db
+desktop.ini
+.DS_Store

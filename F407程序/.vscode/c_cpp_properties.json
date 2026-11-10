@@ -1,0 +1,33 @@
+{
+    "configurations": [
+        {
+            "name": "STM32F407ZGTx",
+            "includePath": [
+                "${workspaceFolder}/Start",
+                "${workspaceFolder}/Library",
+                "${workspaceFolder}/User",
+                "${workspaceFolder}/System",
+                "D:/CubeCLT/STM32CubeCLT_1.18.0/GNU-tools-for-STM32/arm-none-eabi/include"
+            ],
+            "defines": [
+                "USE_STDPERIPH_DRIVER",
+                "STM32F40_41xxx",
+                "HSE_VALUE=8000000"
+            ],
+            "compilerPath": "D:/CubeCLT/STM32CubeCLT_1.18.0/GNU-tools-for-STM32/bin/arm-none-eabi-gcc.exe",
+            "cStandard": "c99",
+            "cppStandard": "c++17",
+            "intelliSenseMode": "gcc-arm",
+            "browse": {
+                "path": [
+                    "${workspaceFolder}/Start",
+                    "${workspaceFolder}/Library",
+                    "${workspaceFolder}/User",
+                    "${workspaceFolder}/System"
+                ],
+                "limitSymbolsToIncludedHeaders": true
+            }
+        }
+    ],
+    "version": 4
+}
